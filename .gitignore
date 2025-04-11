@@ -1,0 +1,15 @@
+# Ignore Python virtual environments
+venv/
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore environment variables
+.env
+
+# Ignore VS Code settings (optional)
+.vscode/
+
+# Ignore macOS system files
+.DS_Store
