@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - TrustBank</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+  
+    {% if session.get("username") %}
+      <a href="/dashboard">Dashboard</a>
+      <a href="/logout">Logout</a>
+    {% else %}
+      <a href="/login">Login</a>
+    {% endif %}
+  </nav>
+  
+
+  <div class="container">
+    <h1>About TrustBank</h1>
+    <p>
+      Founded in 1995, TrustBank has been a beacon of reliable financial services. With over 100 branches nationwide and a strong online presence, we strive to make banking simpler and more accessible.
+    </p>
+    <p>
+      Our values are rooted in trust, integrity, and innovation. From individuals to businesses, our customers rely on us for top-tier financial solutions.
+    </p>
+    <p>
+      Whether you're opening your first savings account or planning for retirement, we’re here to help you every step of the way.
+    </p>
+  </div>
+
+  <footer>
+    Committed to building a financially secure future for all.
+  </footer>
+</body>
+</html>

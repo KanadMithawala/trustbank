@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Services - TrustBank</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+  
+    {% if session.get("username") %}
+      <a href="/dashboard">Dashboard</a>
+      <a href="/logout">Logout</a>
+    {% else %}
+      <a href="/login">Login</a>
+    {% endif %}
+  </nav>
+  
+
+  <div class="container">
+    <h1>Our Banking Services</h1>
+    <p>Explore our services below:</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 1em;">
+      <button class="service-btn">Open Savings Account</button>
+      <button class="service-btn">Apply for Loan</button>
+      <button class="service-btn">Internet Banking</button>
+      <button class="service-btn">Investments</button>
+      <button class="service-btn">Business Solutions</button>
+      <button class="service-btn">Customer Support</button>
+    </div>
+  </div>
+  
+
+  <footer>
+    Explore our range of financial services tailored for your success.
+  </footer>
+</body>
+</html>

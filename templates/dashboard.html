@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - TrustBank</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <a href="/logout">Logout</a>
+  </nav>
+
+  <div class="container">
+    <h1>Welcome, {{ username }}!</h1>
+    <p>Your dashboard overview:</p>
+    <ul>
+      <li>💳 Account Balance: $12,450.00</li>
+      <li>📅 Last Transaction: April 5, 2025</li>
+      <li>📈 Monthly Spend: $1,820.00</li>
+    </ul>
+  </div>
+
+  <footer>
+    Your financial life in one secure place.
+  </footer>
+</body>
+</html>

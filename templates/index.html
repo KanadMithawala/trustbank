@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <title>Bank Home</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <style>
+    /* Chat toggle button (floating icon) */
+    #chat-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background-color: #004080;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 60px;
+      font-size: 28px;
+      cursor: pointer;
+      z-index: 9999;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+  
+    /* Chatbox container */
+    #chatbox {
+      display: none;
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 320px;
+      background: white;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 9999;
+    }
+  
+    #chatbox strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #004080;
+    }
+  
+    #chatbox input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+  
+    #chatbox button {
+      margin-top: 5px;
+      width: 100%;
+      padding: 8px;
+      background-color: #004080;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  
+    #chatbox button:hover {
+      background-color: #0066cc;
+    }
+  
+    #chat-response {
+      margin-top: 10px;
+      background: #f0f0f0;
+      padding: 5px;
+      border-radius: 5px;
+      min-height: 40px;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+  </style>
+  
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <a href="/register">Register</a>
+  
+    {% if session.get("username") %}
+      <a href="/dashboard">Dashboard</a>
+      <a href="/logout">Logout</a>
+    {% else %}
+      <a href="/login">Login</a>
+    {% endif %}
+  </nav>
+  
+<!-- Page Content -->
+<div class="container" style="text-align: center;">
+  <h1>Welcome to TrustBank</h1>
+  <p style="font-size: 1.2em; max-width: 700px; margin: auto;">
+    Your trusted partner in secure, modern, and hassle-free banking. Manage your money with ease, confidence, and convenience.
+  </p>
+  {% if session.get("username") %}
+  <p>Welcome back, {{ session.get('username') }}!</p>
+  {% endif %}
+
+  <img src="/static/bank-hero.jpg" alt="Banking" style="max-width: 100%; margin-top: 20px; border-radius: 10px;">
+</div>
+
+
+<!-- Chat Toggle Button -->
+<div id="chat-toggle" onclick="toggleChat()">💬</div>
+
+<!-- Chatbox Widget -->
+<div id="chatbox">
+  <strong>AI Helpdesk</strong>
+  <div id="chat-response" class="chat-log"></div>
+  <input type="text" id="userInput" placeholder="Ask something..." />
+  <button onclick="sendMessage()">Send</button>
+</div>
+
+
+<!-- Footer -->
+<footer>
+  Need help? Use our AI chatbot!
+</footer>
+
+<!-- Chatbot Script -->
+<script>
+  const chatbox = document.getElementById("chatbox");
+  const chatLog = document.getElementById("chat-response");
+
+  function toggleChat() {
+    chatbox.style.display = (chatbox.style.display === "none") ? "block" : "none";
+  }
+
+  function sendMessage() {
+    const inputField = document.getElementById("userInput");
+    const message = inputField.value.trim();
+    if (!message) return;
+
+    // Display user message
+    const userMsgDiv = document.createElement("div");
+    userMsgDiv.classList.add("user");
+    userMsgDiv.innerText = "You: " + message;
+    chatLog.appendChild(userMsgDiv);
+
+    fetch('/chat', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({message: message})
+    })
+    .then(res => res.json())
+    .then(data => {
+      const botMsgDiv = document.createElement("div");
+      botMsgDiv.classList.add("bot");
+      botMsgDiv.innerText = "Bot: " + data.reply;
+      chatLog.appendChild(botMsgDiv);
+      chatLog.scrollTop = chatLog.scrollHeight; // auto scroll to bottom
+      inputField.value = "";
+    });
+  }
+</script>
+
+</body>
+</html>

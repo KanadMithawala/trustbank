@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - TrustBank</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+  
+    {% if session.get("username") %}
+      <a href="/dashboard">Dashboard</a>
+      <a href="/logout">Logout</a>
+    {% else %}
+      <a href="/login">Login</a>
+    {% endif %}
+  </nav>  
+
+  <div class="container">
+    <h1>Contact TrustBank</h1>
+    <form method="post" action="/contact">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" required />
+
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" required />
+
+      <label for="message">Message:</label>
+      <textarea name="message" id="message" rows="4" required></textarea>
+
+      <input type="submit" value="Send Message" />
+    </form>
+  </div>
+
+  <footer>
+    You can also reach us at support@trustbank.com or call 1800-000-TRUST
+  </footer>
+</body>
+</html>
